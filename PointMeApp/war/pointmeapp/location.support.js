@@ -22,9 +22,10 @@ function callbackPosition(position) {
 	} else {
 			alert('ID ALREADY CREATED. ' + document.cookie);
 	}
-	data['id'] = id;
+	
+	data['identifier'] = id;
 	$.ajax({
-		url: "",
+		url: "/registerLocation",
 		data: data,
 		method: "POST",
 		success: function(msg) {
