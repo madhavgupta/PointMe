@@ -1,13 +1,24 @@
-var id;
+var id = 0;
 function updateLocation(){ 
+	var options = {
+  		enableHighAccuracy: true,
+  		timeout: 5000,
+  		maximumAge: 0
+	};
 	if(navigator.geolocation) {
-		navigator.geolocation.getCurrentPosition(callbackPosition);
-		alert("callbacks?");
+		console.log("about to call geolocate");
+		navigator.geolocation.getCurrentPosition(callbackPosition, errorHandler,options);
 	} else {
 		alert('Location not supported by your browser');
 	}
 }
+function errorHandler(error) {
+	alert(error);
+	console.log('in error hanlder');
+}
 function callbackPosition(position) {
+		console.log('success');
+
 	var data = {};
 	alert(position.coords.longitude + ","+position.coords.latitude);
 	data['long'] = position.coords.longitude;
@@ -22,8 +33,8 @@ function callbackPosition(position) {
 	} else {
 			alert('ID ALREADY CREATED. ' + document.cookie);
 	}
-	
-	data['identifier'] = id;
+	var id = "DINGINGING";
+	data['identifier'] = document.cookie;
 	$.ajax({
 		url: "/registerLocation",
 		data: data,

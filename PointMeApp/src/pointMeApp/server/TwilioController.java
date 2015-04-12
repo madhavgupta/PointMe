@@ -2,10 +2,11 @@ package pointMeApp.server;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
 import java.util.Map;
 import java.util.HashMap;
- 
+
 import com.twilio.sdk.resource.instance.Account;
 import com.twilio.sdk.TwilioRestClient;
 import com.twilio.sdk.TwilioRestException;
@@ -19,14 +20,17 @@ public class TwilioController extends HttpServlet{
 	public static String AUTH_TOKEN = "aaf1131572f1f8b22f00fea818ba28d7";
 	public static Boolean AUTHENTICATED = false;
 	private static final Logger log = Logger.getLogger("CLASS");
-
-
+	public static final String MESSAGE = "Your friend would like to share their location with you.";
+	public static final String LINK = "https://pointmeapplication.appspot.com/findSpot.html?id=";
     //Handle an incoming HTTP Request
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         //Create a Twilio REST client
 		String to = req.getParameter("to");
 		String body = req.getParameter("body");
-        TwilioRestClient client = new TwilioRestClient(ACCOUNT_SID, AUTH_TOKEN);
+		sendMessage(to,body);
+    }
+    public static void sendMessage(String to, String body) {
+    	TwilioRestClient client = new TwilioRestClient(ACCOUNT_SID, AUTH_TOKEN);
         Account account = client.getAccount();
         log.info("Starting SMS factory");
         log.info("ToNumber = " + to);

@@ -7,10 +7,17 @@ import com.googlecode.objectify.annotation.Index;
 public class Point {
     @Id Long id;
     @Index String license;
-    int latitude;
-    int longitude;
+    Double latitude;
+    Double longitude;
+    String number;
     private Point() {}
-    public Point(Long id, int latitude, int longitude) {
+    public Point(Long id, Double latitude, Double longitude) {
+    	this.id = id;
+    	this.latitude = latitude;
+    	this.longitude = longitude;
+    }
+    public Point(Long id, Double latitude, Double longitude, String number_s) {
+    	this.number = number_s;
     	this.id = id;
     	this.latitude = latitude;
     	this.longitude = longitude;
