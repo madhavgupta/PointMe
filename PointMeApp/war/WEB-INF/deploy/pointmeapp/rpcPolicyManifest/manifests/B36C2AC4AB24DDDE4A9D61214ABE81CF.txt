@@ -1,0 +1,2 @@
+serviceClass: pointMeApp.client.GreetingService
+path: B6E9D0080DAE624281B9050FAA9419E9.gwt.rpc
