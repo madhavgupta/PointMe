@@ -1,2 +1,3 @@
 # Module pointmeapp
 # RPC service class, partial path of RPC policy file
+pointMeApp.client.GreetingService, B6E9D0080DAE624281B9050FAA9419E9.gwt.rpc

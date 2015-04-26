@@ -2,6 +2,7 @@ package pointMeApp.server;
 
 import pointMeApp.client.GreetingService;
 import pointMeApp.shared.FieldVerifier;
+
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 /**
@@ -27,9 +28,17 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements
 		// Escape data from the client to avoid cross-site script vulnerabilities.
 		input = escapeHtml(input);
 		userAgent = escapeHtml(userAgent);
+		String URL_send = getUniqueURL();
+		
+		TwilioController.sendMessage(input, URL_send);
+		return "Your message has been sent to "+input;
+	}
 
-		return "Hello, " + input + "!<br><br>I am running " + serverInfo
-				+ ".<br><br>It looks like you are using:<br>" + userAgent;
+	private String getUniqueURL() {
+		// TODO Auto-generated method stub
+		int val = (int) (Math.random()*100000);
+		String generated = "locate/"+val;
+		return "http://1-dot-pointmeapplication.appspot.com/"+generated;
 	}
 
 	/**

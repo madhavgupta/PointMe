@@ -31,8 +31,22 @@
     <servlet-name>RegisterLocation</servlet-name>
     <servlet-class>pointMeApp.server.ObtainLocation</servlet-class>
   </servlet>
-  
-
+    <servlet-mapping>
+    <servlet-name>IntroScreen</servlet-name>
+    <url-pattern>/IntroScreen</url-pattern>
+  </servlet-mapping>
+      <servlet>
+    <servlet-name>IntroScreen</servlet-name>
+    <jsp-file>pointMeApp.server.ObtainLocation</jsp-file>
+  </servlet>
+      <servlet>
+    <servlet-name>Locate</servlet-name>
+    <jsp-file>locate.jsp</jsp-file>
+  </servlet>
+    <servlet-mapping>
+    <servlet-name>Locate</servlet-name>
+    <url-pattern>/locate/*</url-pattern>
+  </servlet-mapping>
   <!-- Default page to serve -->
   <welcome-file-list>
     <welcome-file>PointMeApp.html</welcome-file>
