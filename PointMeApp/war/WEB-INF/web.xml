@@ -37,13 +37,13 @@
   </servlet-mapping>
       <servlet>
     <servlet-name>IntroScreen</servlet-name>
-    <jsp-file>pointMeApp.server.ObtainLocation</jsp-file>
+    <servlet-class>pointMeApp.server.ObtainLocation</servlet-class>
   </servlet>
       <servlet>
     <servlet-name>Locate</servlet-name>
-    <jsp-file>locate.jsp</jsp-file>
+    <servlet-class>pointMeApp.server.LocateServer</servlet-class>
   </servlet>
-    <servlet-mapping>
+  <servlet-mapping>
     <servlet-name>Locate</servlet-name>
     <url-pattern>/locate/*</url-pattern>
   </servlet-mapping>

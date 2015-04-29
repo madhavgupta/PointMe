@@ -23,6 +23,9 @@ public class TwilioController extends HttpServlet{
 	public static final String MESSAGE = "Your friend would like to share their location with you.";
 	public static final String LINK = "https://pointmeapplication.appspot.com/findSpot.html?id=";
     //Handle an incoming HTTP Request
+	public void doGet(HttpServletRequest req, HttpServletResponse resp){
+		
+	}
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         //Create a Twilio REST client
 		String to = req.getParameter("to");
