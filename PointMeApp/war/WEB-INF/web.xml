@@ -41,7 +41,7 @@
   </servlet>
       <servlet>
     <servlet-name>Locate</servlet-name>
-    <servlet-class>pointMeApp.server.LocateServer</servlet-class>
+    <jsp-file>/WEB-INF/locate.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
     <servlet-name>Locate</servlet-name>
