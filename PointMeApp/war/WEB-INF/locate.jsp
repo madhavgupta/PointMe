@@ -19,10 +19,16 @@
   <body>
   <h1>PointMe : Your Guide to Finding Your Friends </h1>
 	
-//get the users id from url and datastore and get associated location/calculate distance display
-//with arrow.  For repeated updates use a loop to continuously check location value and update arrow
-
-
+get the users id from url and datastore and get associated location/calculate distance display
+with arrow.  For repeated updates use a loop to continuously check location value and update arrow
+	<p id="demo"></p>
+<script>
+	var x = document.URL;
+	var res = x.substring(51);
+	document.getElementById("demo").innerHTML = res;
+</script> 
 <h2> Distance from final destination: </h2>
+<img src="https://cdn4.iconfinder.com/data/icons/marine-and-nautical/78/Marine_nautical-09-512.png" alt="Arrow">
   </body>
+  
 </html>

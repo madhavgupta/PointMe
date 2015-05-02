@@ -2,6 +2,12 @@ package pointMeApp.server;
 
 import javax.servlet.RequestDispatcher;
 
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.FetchOptions;
+import com.google.appengine.api.datastore.Query;
+
 import pointMeApp.client.GreetingService;
 import pointMeApp.shared.FieldVerifier;
 
@@ -32,15 +38,21 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements
 		userAgent = escapeHtml(userAgent);
 		String URL_send = getUniqueURL();
 		
-		TwilioController.sendMessage(input, URL_send);
+		TwilioController.sendMessage(input, "http://1-dot-pointmeapplication.appspot.com/locate/"+URL_send);
+
+		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+		 Entity greeting = new Entity("UniqueID",URL_send);
+		 greeting.setProperty("Longitude", 0);
+		 greeting.setProperty("Latitude", 0);
+		  datastore.put(greeting);
 		return "Your message has been sent to "+input;
 	}
 
 	private String getUniqueURL() {
 		// TODO Auto-generated method stub
 		int val = (int) (Math.random()*100000);
-		String generated = "locate/"+val;
-		return "http://1-dot-pointmeapplication.appspot.com/"+generated;
+		String generated = ""+val;
+		return generated;
 	}
 
 	/**
