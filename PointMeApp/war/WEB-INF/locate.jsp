@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.google.appengine.api.users.User" %>
 <%@ page import="com.google.appengine.api.users.UserService" %>
@@ -12,7 +12,7 @@
 <%@ page import="com.google.appengine.api.datastore.KeyFactory" %>
 <%@ page import ="com.google.appengine.api.datastore.Text" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<html>
+<!DOCTYPE html>
   <head>
 	  <link rel="stylesheet" href="locate.css">
   </head>
@@ -25,8 +25,22 @@ with arrow.  For repeated updates use a loop to continuously check location valu
 <script>
 	var x = document.URL;
 	var res = x.substring(51);
+
+	
 	document.getElementById("demo").innerHTML = res;
-</script> 
+</script>
+ 	
+<script>
+DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+Filter keyFilter = new FilterPredicate(Entity.KEY_RESERVED_PROPERTY,
+                      FilterOperator.EQUAL,
+                      res);
+Query getID = new Query("UniqueID").setFilter(keyFilter);
+	System.out.println("created query");
+	List<Entity> IDS = datastore.prepare(getID).asList(FetchOptions.Builder.withLimit(20));
+	System.out.println("got values");
+	
+</script>
 <h2> Distance from final destination: </h2>
 <img src="https://cdn4.iconfinder.com/data/icons/marine-and-nautical/78/Marine_nautical-09-512.png" alt="Arrow">
   </body>
