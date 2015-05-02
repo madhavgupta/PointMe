@@ -1,6 +1,8 @@
 package pointMeApp.client;
 
+import pointMeApp.server.ObtainLocation;
 import pointMeApp.shared.FieldVerifier;
+
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
