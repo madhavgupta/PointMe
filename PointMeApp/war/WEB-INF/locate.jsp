@@ -26,10 +26,39 @@ get the users id from url and datastore and get associated location/calculate di
 with arrow.  For repeated updates use a loop to continuously check location value and update arrow
 	<p id="demo"></p>
 <script>
-	var x = document.URL;
-	var res = x.substring(51);
+var x = document.getElementById("demo");
+	function getLocation() {
+	    if (navigator.geolocation) {
+	        navigator.geolocation.watchPosition(callbackPosition);
+	    } else {
+	        x.innerHTML = "Geolocation is not supported by this browser.";
+	    }
+	}
+	function callbackPosition(position) {
+	var data = {};
+	x.innerHTML(position.coords.longitude + ","+position.coords.latitude);
+	data['long'] = position.coords.longitude;
+	data['lat'] = position.coords.latitude;
+			alert(document.cookie);
 
-	document.getElementById("demo").innerHTML = res;
+	if(document.cookie == "") {
+		alert(document.cookie);
+		alert('CREATING NEW ID');
+		id = hashCode(Date());
+		document.cookie = id;
+	} else {
+			alert('ID ALREADY CREATED. ' + document.cookie);
+	}
+	data['id'] = id;
+	$.ajax({
+		url: "",
+		data: data,
+		method: "POST",
+		success: function(msg) {
+			alert(msg);
+		},
+	});
+}
 </script>
  <%
 DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
