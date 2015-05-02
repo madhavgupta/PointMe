@@ -32,16 +32,17 @@ with arrow.  For repeated updates use a loop to continuously check location valu
 	document.getElementById("demo").innerHTML = res;
 </script>
  <%
-DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-Filter keyFilter = new FilterPredicate("UniqueID",
-                      FilterOperator.EQUAL,
-                      11351);
-Query getID = new Query("UniqueID").setFilter(keyFilter);
-	
-	List<Entity> IDS = datastore.prepare(getID).asList(FetchOptions.Builder.withLimit(20));
-	if(!IDS.isEmpty())
-		System.out.println("WOOHOO");
-	else System.out.println("OH SHIT");
+ 
+	DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+	Filter keyFilter = new FilterPredicate("UniqueID",
+	                      FilterOperator.EQUAL,
+	                      11351);
+	Query getID = new Query("UniqueID").setFilter(keyFilter);
+		
+		List<Entity> IDS = datastore.prepare(getID).asList(FetchOptions.Builder.withLimit(20));
+		if(!IDS.isEmpty())
+			out.println("<p>WOOHOO</p>");
+		else System.out.println("<p>OH SHIT</p>");
 	
 %>
 <h2> Distance from final destination: </h2>
