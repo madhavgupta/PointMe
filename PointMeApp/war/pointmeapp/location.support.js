@@ -1,4 +1,4 @@
- var id;
+var id;
 function updateLocation(){ 
 	if(navigator.geolocation) {
 		navigator.geolocation.getCurrentPosition(callbackPosition);
