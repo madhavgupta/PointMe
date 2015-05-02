@@ -6,6 +6,9 @@
 <%@ page import="com.google.appengine.api.datastore.DatastoreServiceFactory" %>
 <%@ page import="com.google.appengine.api.datastore.DatastoreService" %>
 <%@ page import="com.google.appengine.api.datastore.Query" %>
+<%@ page import="com.google.appengine.api.datastore.Query.Filter" %>
+<%@ page import="com.google.appengine.api.datastore.Query.FilterOperator" %>
+<%@ page import="com.google.appengine.api.datastore.Query.FilterPredicate" %>
 <%@ page import="com.google.appengine.api.datastore.Entity" %>
 <%@ page import="com.google.appengine.api.datastore.FetchOptions" %>
 <%@ page import="com.google.appengine.api.datastore.Key" %>
@@ -26,21 +29,21 @@ with arrow.  For repeated updates use a loop to continuously check location valu
 	var x = document.URL;
 	var res = x.substring(51);
 
-	
 	document.getElementById("demo").innerHTML = res;
 </script>
- 	
-<script>
+ <%
 DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-Filter keyFilter = new FilterPredicate(Entity.KEY_RESERVED_PROPERTY,
+Filter keyFilter = new FilterPredicate("UniqueID",
                       FilterOperator.EQUAL,
-                      res);
+                      11351);
 Query getID = new Query("UniqueID").setFilter(keyFilter);
-	System.out.println("created query");
-	List<Entity> IDS = datastore.prepare(getID).asList(FetchOptions.Builder.withLimit(20));
-	System.out.println("got values");
 	
-</script>
+	List<Entity> IDS = datastore.prepare(getID).asList(FetchOptions.Builder.withLimit(20));
+	if(!IDS.isEmpty())
+		System.out.println("WOOHOO");
+	else System.out.println("OH SHIT");
+	
+%>
 <h2> Distance from final destination: </h2>
 <img src="https://cdn4.iconfinder.com/data/icons/marine-and-nautical/78/Marine_nautical-09-512.png" alt="Arrow">
   </body>
