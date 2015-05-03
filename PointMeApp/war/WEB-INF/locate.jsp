@@ -72,12 +72,12 @@ getLocation();
 		List<Entity> IDS = datastore.prepare(getID).asList(FetchOptions.Builder.withLimit(20));
 		if(!IDS.isEmpty()){
 		%>
-		document.write("WOOHOO");
+		WOOHOO
 		<%
 		}
 		else {
 		%>
-		document.write("OH SHIT!!!");
+		OH SHIT!!!
 		<%
 		}
 %>
