@@ -62,23 +62,29 @@ var x = document.getElementById("demo");
 getLocation();
 </script>
  <%
- 
-	DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-	Filter keyFilter = new FilterPredicate("UniqueID",
-	                      FilterOperator.EQUAL,
-	                      "87555");
-	Query getID = new Query("UniqueID").setFilter(keyFilter);
-		
-		List<Entity> IDS = datastore.prepare(getID).asList(FetchOptions.Builder.withLimit(20));
-		if(!IDS.isEmpty()){
-		%>
-		WOOHOO
-		<%
-		}
-		else {
-		%>
-		OH SHIT!!!
-		<%
+ StringBuffer requestURL = request.getRequestURL();
+ 	String URL = requestURL.toString();
+ 	URL=URL.substring(51);
+	if(!URL.equals("locate.css"))
+	{
+		System.out.println(URL);
+		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+		Filter keyFilter = new FilterPredicate("UniqueID",
+		                      FilterOperator.EQUAL,
+		                      URL);
+		Query getID = new Query("UniqueID").setFilter(keyFilter);
+			
+			List<Entity> IDS = datastore.prepare(getID).asList(FetchOptions.Builder.withLimit(20));
+			if(!IDS.isEmpty()){
+			%>
+			WOOHOO
+			<%
+			}
+			else {
+			%>
+			OH SHIT!!!
+			<%
+			}
 		}
 %>
 <h2> Distance from final destination: </h2>
