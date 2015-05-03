@@ -33,21 +33,20 @@ var x = document.getElementById("demo");
 	    } else {
 	        x.innerHTML = "Geolocation is not supported by this browser.";
 	    }
-	}
+	} 
 	function callbackPosition(position) {
 	var data = {};
-	x.innerHTML(position.coords.longitude + ","+position.coords.latitude);
+	x.innerHTML=position.coords.longitude + ","+position.coords.latitude;
 	data['long'] = position.coords.longitude;
 	data['lat'] = position.coords.latitude;
-			alert(document.cookie);
+			
 
 	if(document.cookie == "") {
-		alert(document.cookie);
-		alert('CREATING NEW ID');
+
 		id = hashCode(Date());
 		document.cookie = id;
 	} else {
-			alert('ID ALREADY CREATED. ' + document.cookie);
+
 	}
 	data['id'] = id;
 	$.ajax({
@@ -55,24 +54,32 @@ var x = document.getElementById("demo");
 		data: data,
 		method: "POST",
 		success: function(msg) {
-			alert(msg);
+			
 		},
 	});
+
 }
+getLocation();
 </script>
  <%
  
 	DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 	Filter keyFilter = new FilterPredicate("UniqueID",
 	                      FilterOperator.EQUAL,
-	                      11351);
+	                      "87555");
 	Query getID = new Query("UniqueID").setFilter(keyFilter);
 		
 		List<Entity> IDS = datastore.prepare(getID).asList(FetchOptions.Builder.withLimit(20));
-		if(!IDS.isEmpty())
-			out.println("<p>WOOHOO</p>");
-		else System.out.println("<p>OH SHIT</p>");
-	
+		if(!IDS.isEmpty()){
+		%>
+		document.write("WOOHOO");
+		<%
+		}
+		else {
+		%>
+		document.write("OH SHIT!!!");
+		<%
+		}
 %>
 <h2> Distance from final destination: </h2>
 <img src="https://cdn4.iconfinder.com/data/icons/marine-and-nautical/78/Marine_nautical-09-512.png" alt="Arrow">
