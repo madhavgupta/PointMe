@@ -76,8 +76,15 @@ getLocation();
 			
 			List<Entity> IDS = datastore.prepare(getID).asList(FetchOptions.Builder.withLimit(20));
 			if(!IDS.isEmpty()){
+				Entity ServerSide = IDS.get(0);
+				pageContext.setAttribute("Longitude",ServerSide.getProperty("Longitude"));
+				pageContext.setAttribute("Latitude",ServerSide.getProperty("Latitude"));
+				
 			%>
-			WOOHOO
+			Server Longitude: 
+			<b>${fn:escapeXml(Longitude)}</b>
+			Server Latitude:
+			<b>${fn:escapeXml(Latitude)}</b>
 			<%
 			}
 			else {
