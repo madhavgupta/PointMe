@@ -44,6 +44,7 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements
 		 Entity greeting = new Entity("UniqueID",URL_send);
 		 greeting.setProperty("Longitude", 0);
 		 greeting.setProperty("Latitude", 0);
+		 greeting.setProperty("UniqueID", URL_send);
 		  datastore.put(greeting);
 		return "Your message has been sent to "+input;
 	}
