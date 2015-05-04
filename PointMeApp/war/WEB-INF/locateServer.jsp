@@ -25,28 +25,20 @@
 </head>
 <body>
 	<h1>PointMe : Your Guide to Finding Your Friends</h1>
-	<p id="demo"></p>
-	<p id="demo2"></p>
-	<p id="demo3"></p>
-	<p id="demo4"></p>
-	<p id="demo5"></p>
-	<p id="demo6"></p>
 
 
 	<%
  	int latitude; int longitude;
  		Object lat; Object lon;
 	 StringBuffer requestURL = request.getRequestURL();
-
-	 	String[] URLarr =URL.split("/");
-	 	String URL = URLarr[URLarr.length - 1];
-
+	 	String URL = requestURL.toString();
+	 	URL=URL.substring(50);
 		if(!URL.equals("locate.css"))
 		{
 			System.out.println(URL);
 			DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 			Entity greeting = new Entity("UniqueID",URL);
-		 greeting.setProperty("Longitude", 0);
+		 greeting.setProperty("Longitude", request.getParameter("Longitude"));
 		 greeting.setProperty("Latitude", 0);
 		 greeting.setProperty("UniqueID", URL);
 		  datastore.put(greeting);
@@ -74,37 +66,8 @@
 
 //			friendLocation.innerHTML = "Pointing to: "
 //					+ lat + ", " + lon;
-
-			//Convert latitude and longitude into radians
-			var myLatR = position.coords.latitude * Math.PI / 180;
-			var myLonR = position.coords.longitude * Math.PI / 180;
-			var theirLongR = document.getElementById("Longitude");
-			var theirLatR = document.getElementById("Latitude");
-			var dLat = (-97.743279 - position.coords.latitude) * Math.PI / 180; //WE NEED TO CHANGE THE 0'S TO THE SERVER VALUES
-			var dLon = (30.295206 - position.coords.longitude) * Math.PI / 180; //and here
-
-			//Calculate distance here            
-			var R = 6371; // Radius of the earth in km
-			var a = 0.5 - Math.cos(dLat) / 2 + Math.cos(myLatR)
-					* Math.cos(theirLatR * Math.PI / 180) * //and here
-					(1 - Math.cos(dLon)) / 2;
-
-			var dist = R * 2 * 1000 * Math.asin(Math.sqrt(a));
-
-			yourDistance.innerHTML = "Distance to your destination: " + dist
-					+ " meters";
-
-			//Calculate angle here
-			var y = Math.sin(dLon) * Math.cos(theirLatR);                  //latitude of desination
-			var x = Math.cos(myLatR) * Math.sin(theirLatR) - Math.sin(myLatR)      //latitude of destination
-					* Math.cos(theirLatR) * Math.cos(dLon);                    //latitude of destination
-			var brng = Math.atan2(y, x);
-			angle = brng * 180 / Math.PI;
-			angleFound = true;
-
-			yourAngle.innerHTML = "Angle to your destination: " + angle
-					+ " degrees";
-
+			document.getElementById("Longitude")= position.coords.longitude;
+			document.getElementById("Latitude")= position.coords.latitude;
 			if (document.cookie == "") {
 
 				id = hashCode(Date());
