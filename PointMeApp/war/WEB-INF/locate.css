@@ -1,2 +1,8 @@
 /** Add css rules here for your application. */
 
+#compass{
+	width:100%;
+	transform-origin: 50% 50%;
+	-webkit-transform-origin: 50% 50%;
+	-moz-transform-origin: 50% 50%;
+}
