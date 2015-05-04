@@ -36,7 +36,7 @@
 	<%
  	int latitude; int longitude;
  		Object lat; Object lon;
-	 StringBuffer requestURL = request.getRequestURL();
+	 	StringBuffer requestURL = request.getRequestURL();
 	 	String URL = requestURL.toString();
 	 	String[] URLarr =URL.split("/");
 
@@ -46,7 +46,7 @@
 			DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 			Filter keyFilter = new FilterPredicate("UniqueID",
 			                      FilterOperator.EQUAL,
-			                      URLarr[4]);
+			                      URLarr[URLarr.length -1 ]);
 			Query getID = new Query("UniqueID").setFilter(keyFilter);
 		
 		List<Entity> IDS = datastore.prepare(getID).asList(FetchOptions.Builder.withLimit(20));
