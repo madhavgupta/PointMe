@@ -38,14 +38,15 @@
  		Object lat; Object lon;
 	 StringBuffer requestURL = request.getRequestURL();
 	 	String URL = requestURL.toString();
-	 	URL=URL.substring(51);
+	 	String[] URLarr =URL.split("/");
+
 		if(!URL.equals("locate.css"))
 		{
-			System.out.println(URL);
+			System.out.println(URLarr[4]);
 			DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 			Filter keyFilter = new FilterPredicate("UniqueID",
 			                      FilterOperator.EQUAL,
-			                      URL);
+			                      URLarr[4]);
 			Query getID = new Query("UniqueID").setFilter(keyFilter);
 		
 		List<Entity> IDS = datastore.prepare(getID).asList(FetchOptions.Builder.withLimit(20));
@@ -58,7 +59,7 @@
 //  			latitude = (Integer) ServerSide.getProperty("Latitude");
 //  			longitude = (Integer) ServerSide.getProperty("Longitude");
 	%>
-	Your friend's location:
+	Your friend's ' location:
 	<b>${fn:escapeXml(Latitude)}</b> ,
 	<b>${fn:escapeXml(Longitude)}</b>
 	<br>
@@ -147,6 +148,9 @@
 				yourLocation.innerHTML = "Geolocation is not supported by this browser.";
 			}
 		}
+		function getPrimaryLocation() {
+			alert(location.href);
+		}
 		function callbackPosition(position) {
 			var data = {};
 			yourLocation.innerHTML = "Your location: "
@@ -160,6 +164,7 @@
 //					+ lat + ", " + lon;
 
 			//Convert latitude and longitude into radians
+			var primaryLocation = getPrimaryLocation();
 			var myLatR = position.coords.latitude * Math.PI / 180;
 			var myLonR = position.coords.longitude * Math.PI / 180;
 			var theirLongR = document.getElementById("Longitude");
