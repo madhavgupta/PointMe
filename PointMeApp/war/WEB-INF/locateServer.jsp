@@ -50,60 +50,6 @@
 	%>
 
 	<script>
-		var yourLocation = document.getElementById("demo");
-		var yourDistance = document.getElementById("demo2");
-		var yourAngle = document.getElementById("demo3");
-		var yourAlpha = document.getElementById("demo4");
-		var yourDA = document.getElementById("demo5");
-		var friendLocation = document.getElementById("demo6");
-
-		var angle;
-		var angleFound = false;
-
-		function handleOrientation(event) {
-			var alpha;
-			var displayAngle;
-			if (angleFound) {
-				if (event.webkitCompassHeading) {
-					
-					alpha = event.webkitCompassHeading;
-					displayAngle = angle + alpha;
-					
-					//rotation reversed for iOS
-					
-					compass.style.WebkitTransform = 'rotate(-' + (displayAngle - 45)
-							+ 'deg)';
-					
-				} else {
-					alpha = event.alpha;
-					displayAngle = angle + alpha;
-					webkitAlpha = displayAngle;
-					if (!window.chrome) {
-						webkitAlpha = webkitAlpha - 270;
-					}
-	 				
-					compass.style.WebkitTransform = 'rotate(' + (webkitAlpha - 45)
-						+ 'deg)';
-					
-				}
-				if (alpha === undefined || alpha === null) {
-					yourAlpha.innerHTML = "Can't determine your device's orientation...";
-				} else {
-					yourAlpha.innerHTML = "Alpha is: " + alpha;
-
-				}
-				
-// 				compass.style.Transform = 'rotate(' + alpha + 'deg)';
-
-// 				compass.style.MozTransform = 'rotate(-' + alpha + 'deg)';
-			
-				yourDA.innerHTML = "Displaying angle: " + displayAngle;
-			}
-
-		}
-
-		window.addEventListener('deviceorientation', handleOrientation);
-
 		function getLocation() {
 			if (navigator.geolocation) {
 				navigator.geolocation.watchPosition(callbackPosition);
