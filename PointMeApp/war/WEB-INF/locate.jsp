@@ -60,7 +60,7 @@
 //  			longitude = (Integer) ServerSide.getProperty("Longitude");
 	%>
 	Your friend's ' location:
-	<b>${fn:escapeXml(Latitude)}</b> ,
+	<b>${fn:escapeXml(Latitude)}</b> ,y
 	<b>${fn:escapeXml(Longitude)}</b>
 	<br>
 	<center>
@@ -149,7 +149,7 @@
 			}
 		}
 		function getPrimaryLocation() {
-			alert(location.href);
+			alert(location.href.split("/")[4]);
 		}
 		function callbackPosition(position) {
 			var data = {};
@@ -201,15 +201,15 @@
 			} else {
 
 			}
-			data['id'] = id;
-			$.ajax({
-				url : "",
-				data : data,
-				method : "POST",
-				success : function(msg) {
+			//data['id'] = id;
+			//$.ajax({
+			//	url : "",
+			//	data : data,
+			//	method : "POST",
+			//	success : function(msg) {
 
-				},
-			});
+			//	},
+			//});
 
 		}
 		getLocation();
