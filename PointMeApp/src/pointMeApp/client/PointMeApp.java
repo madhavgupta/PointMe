@@ -136,12 +136,14 @@ public class PointMeApp implements EntryPoint {
 							}
 
 							public void onSuccess(String result) {
-								dialogBox.setText("Remote Procedure Call");
-								serverResponseLabel
-										.removeStyleName("serverResponseLabelError");
-								serverResponseLabel.setHTML(result);
-								dialogBox.center();
-								closeButton.setFocus(true);
+								
+									dialogBox.setText("Remote Procedure Call");
+									serverResponseLabel
+											.removeStyleName("serverResponseLabelError");
+									serverResponseLabel.setHTML(result);
+									
+									dialogBox.center();
+									closeButton.setFocus(true);
 							}
 						});
 			}

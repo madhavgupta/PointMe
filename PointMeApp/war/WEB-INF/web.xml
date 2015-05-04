@@ -47,6 +47,14 @@
     <servlet-name>Locate</servlet-name>
     <url-pattern>/locate/*</url-pattern>
   </servlet-mapping>
+        <servlet>
+    <servlet-name>LocateServer</servlet-name>
+    <jsp-file>/WEB-INF/locateServer.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LocateServer</servlet-name>
+    <url-pattern>/track/*</url-pattern>
+  </servlet-mapping>
   <!-- Default page to serve -->
   <welcome-file-list>
     <welcome-file>PointMeApp.html</welcome-file>

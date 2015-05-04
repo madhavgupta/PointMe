@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import static com.googlecode.objectify.ObjectifyService.ofy;
 
 import com.google.appengine.api.users.User;
+import com.google.gwt.geolocation.client.Geolocation;
 import com.googlecode.objectify.ObjectifyService;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
@@ -25,6 +26,7 @@ public class ObtainLocation extends HttpServlet {
 
 	 public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 	        //Create a Twilio REST client
+		 
 		 String identifier_s = req.getParameter("identifier");
 		 String long_s = req.getParameter("long");
 		 String lat_s = req.getParameter("lat");
