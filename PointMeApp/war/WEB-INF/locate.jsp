@@ -59,8 +59,8 @@
 //  			longitude = (Integer) ServerSide.getProperty("Longitude");
 	%>
 	Your friend's location:
-	<b>${fn:escapeXml(Longitude)}</b> ,
-	<b>${fn:escapeXml(Latitude)}</b>
+	<b>${fn:escapeXml(Latitude)}</b> ,
+	<b>${fn:escapeXml(Longitude)}</b>
 	<br>
 	<center>
 		<div id="compassContainer">
@@ -162,15 +162,15 @@
 			//Convert latitude and longitude into radians
 			var myLatR = position.coords.latitude * Math.PI / 180;
 			var myLonR = position.coords.longitude * Math.PI / 180;
-			//	var theirLatR = 
-			//	var theirLon R = 
-			var dLat = (0 - position.coords.latitude) * Math.PI / 180; //WE NEED TO CHANGE THE 0'S TO THE SERVER VALUES
-			var dLon = (0 - position.coords.longitude) * Math.PI / 180; //and here
+			var theirLongR = document.getElementById("Longitude");
+			var theirLatR = document.getElementById("Latitude");
+			var dLat = (-97.743279 - position.coords.latitude) * Math.PI / 180; //WE NEED TO CHANGE THE 0'S TO THE SERVER VALUES
+			var dLon = (30.295206 - position.coords.longitude) * Math.PI / 180; //and here
 
 			//Calculate distance here            
 			var R = 6371; // Radius of the earth in km
 			var a = 0.5 - Math.cos(dLat) / 2 + Math.cos(myLatR)
-					* Math.cos(0 * Math.PI / 180) * //and here
+					* Math.cos(theirLatR * Math.PI / 180) * //and here
 					(1 - Math.cos(dLon)) / 2;
 
 			var dist = R * 2 * 1000 * Math.asin(Math.sqrt(a));
@@ -179,9 +179,9 @@
 					+ " meters";
 
 			//Calculate angle here
-			var y = Math.sin(dLon) * Math.cos(0);
-			var x = Math.cos(myLatR) * Math.sin(0) - Math.sin(myLatR)
-					* Math.cos(0) * Math.cos(dLon);
+			var y = Math.sin(dLon) * Math.cos(theirLatR);                  //latitude of desination
+			var x = Math.cos(myLatR) * Math.sin(theirLatR) - Math.sin(myLatR)      //latitude of destination
+					* Math.cos(theirLatR) * Math.cos(dLon);                    //latitude of destination
 			var brng = Math.atan2(y, x);
 			angle = brng * 180 / Math.PI;
 			angleFound = true;
