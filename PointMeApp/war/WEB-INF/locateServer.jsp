@@ -43,46 +43,10 @@
 		{
 			System.out.println(URL);
 			DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-			Filter keyFilter = new FilterPredicate("UniqueID",
-			                      FilterOperator.EQUAL,
-			                      URL);
-			Query getID = new Query("UniqueID").setFilter(keyFilter);
-		
-		List<Entity> IDS = datastore.prepare(getID).asList(FetchOptions.Builder.withLimit(20));
-		if(!IDS.isEmpty()){
-			Entity ServerSide = IDS.get(0);
-			lon = ServerSide.getProperty("Longitude");
-			lat = ServerSide.getProperty("Latitude");
-			pageContext.setAttribute("Longitude",lon);
- 			pageContext.setAttribute("Latitude",lat);
-//  			latitude = (Integer) ServerSide.getProperty("Latitude");
-//  			longitude = (Integer) ServerSide.getProperty("Longitude");
-	%>
-	Your friend's location:
-	<b>${fn:escapeXml(Latitude)}</b> ,
-	<b>${fn:escapeXml(Longitude)}</b>
-	<br>
-	<center>
-		<div id="compassContainer">
-			<center>
-				<img
-					src="https://cdn4.iconfinder.com/data/icons/marine-and-nautical/78/Marine_nautical-09-512.png"
-					alt="Arrow" id="compass">
-			</center>
-		</div>
-	</center>
-	<%
-		}
-		else {
-	%>
-	Sorry But this URL is Invalid! You will now be redirected to the home
-	page.
-	<META http-equiv="refresh"
-		content="5;URL=http://1-dot-pointmeapplication.appspot.com">
 
-	<%
+		
+	
 		}
-			}
 	%>
 
 	<script>

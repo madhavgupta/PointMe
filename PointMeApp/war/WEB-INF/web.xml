@@ -39,6 +39,14 @@
     <servlet-name>IntroScreen</servlet-name>
     <servlet-class>pointMeApp.server.ObtainLocation</servlet-class>
   </servlet>
+  <servlet-mapping>
+    <servlet-name>SentNumber</servlet-name>
+    <url-pattern>/SentNumber</url-pattern>
+  </servlet-mapping>
+      <servlet>
+    <servlet-name>SentNumber</servlet-name>
+    <servlet-class>pointMeApp.server.LocateServer</servlet-class>
+  </servlet>
       <servlet>
     <servlet-name>Locate</servlet-name>
     <jsp-file>/WEB-INF/locate.jsp</jsp-file>

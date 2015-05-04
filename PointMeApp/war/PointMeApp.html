@@ -64,8 +64,14 @@
         <td colspan="2" style="font-weight:bold;">Please enter the phone number to send your location to:</td>        
       </tr>
       <tr>
-        <td id="nameFieldContainer"></td>
-        <td id="sendButtonContainer"></td>
+        <td id="nameFieldContainer">
+        <textarea name="content" rows="1" cols="15"></textarea>
+        </td>
+        <td id="sendButtonContainer">
+        <form action="/SentNumber" method="post">
+    	<input type="submit" value="Send" id="submitbuttons"/>
+   		</form>
+        </td>
       </tr>
       <tr>
         <td colspan="2" style="color:red;" id="errorLabelContainer"></td>
