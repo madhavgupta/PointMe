@@ -27,26 +27,7 @@
 	<h1>PointMe : Your Guide to Finding Your Friends</h1>
 
 
-	<%
- 	int latitude; int longitude;
- 		Object lat; Object lon;
-	 StringBuffer requestURL = request.getRequestURL();
-	 	String URL = requestURL.toString();
-	 	URL=URL.substring(50);
-		if(!URL.equals("locate.css"))
-		{
-			System.out.println(URL);
-			DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-			Entity greeting = new Entity("UniqueID",URL);
-		 greeting.setProperty("Longitude", request.getParameter("Longitude"));
-		 greeting.setProperty("Latitude", 0);
-		 greeting.setProperty("UniqueID", URL);
-		  datastore.put(greeting);
-		
 	
-		}
-	%>
-
 	<script>
 		function getLocation() {
 			if (navigator.geolocation) {
@@ -61,13 +42,16 @@
 					+ position.coords.latitude + ","
 					+ position.coords.longitude;
 
-			data['long'] = position.coords.longitude;
+			data['lon'] = position.coords.longitude;
 			data['lat'] = position.coords.latitude;
 
 //			friendLocation.innerHTML = "Pointing to: "
 //					+ lat + ", " + lon;
+
 			document.getElementById("Longitude")= position.coords.longitude;
 			document.getElementById("Latitude")= position.coords.latitude;
+		
+			
 			if (document.cookie == "") {
 
 				id = hashCode(Date());
@@ -75,13 +59,13 @@
 			} else {
 
 			}
-			data['id'] = id;
+			data['identifier'] = id;
 			$.ajax({
-				url : "",
+				url : "/registerLocation/",
 				data : data,
 				method : "POST",
 				success : function(msg) {
-
+					alert(msg);
 				},
 			});
 
