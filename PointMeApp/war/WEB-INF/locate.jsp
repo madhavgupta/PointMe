@@ -40,9 +40,9 @@
 	 	String URL = requestURL.toString();
 	 	String[] URLarr =URL.split("/");
 
-		if(!URL.equals("locate.css"))
+		if(!URLarr[URLarr.length -1 ].equals("locate.css"))
 		{
-			System.out.println(URLarr[4]);
+
 			DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 			Filter keyFilter = new FilterPredicate("UniqueID",
 			                      FilterOperator.EQUAL,

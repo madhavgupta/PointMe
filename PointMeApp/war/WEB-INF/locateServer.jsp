@@ -37,8 +37,8 @@
  	int latitude; int longitude;
  		Object lat; Object lon;
 	 StringBuffer requestURL = request.getRequestURL();
-	 	String URL = requestURL.toString();
-	 	URL=URL.substring(51);
+	 	String[] URLarr =URL.split("/");
+	 	String URL = URLarr[URLarr.length - 1];
 		if(!URL.equals("locate.css"))
 		{
 			System.out.println(URL);
