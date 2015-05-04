@@ -60,7 +60,7 @@
 //  			longitude = (Integer) ServerSide.getProperty("Longitude");
 	%>
 	Your friend's ' location:
-	<b>${fn:escapeXml(Latitude)}</b> ,y
+	<b>${fn:escapeXml(Latitude)}</b> , 
 	<b>${fn:escapeXml(Longitude)}</b>
 	<br>
 	<center>
@@ -148,9 +148,7 @@
 				yourLocation.innerHTML = "Geolocation is not supported by this browser.";
 			}
 		}
-		function getPrimaryLocation() {
-			alert(location.href.split("/")[4]);
-		}
+
 		function callbackPosition(position) {
 			var data = {};
 			yourLocation.innerHTML = "Your location: "
@@ -164,24 +162,26 @@
 //					+ lat + ", " + lon;
 
 			//Convert latitude and longitude into radians
-			var primaryLocation = getPrimaryLocation();
 			var myLatR = position.coords.latitude * Math.PI / 180;
 			var myLonR = position.coords.longitude * Math.PI / 180;
-			var theirLongR = document.getElementById("Longitude");
-			var theirLatR = document.getElementById("Latitude");
-			var dLat = (-97.743279 - position.coords.latitude) * Math.PI / 180; //WE NEED TO CHANGE THE 0'S TO THE SERVER VALUES
-			var dLon = (30.295206 - position.coords.longitude) * Math.PI / 180; //and here
+			var theirLongR = -97.7361359 ;
+			var theirLatR = 30.2896341 ;
 
+			var dLat = (theirLatR - position.coords.latitude) * Math.PI / 180; //WE NEED TO CHANGE THE 0'S TO THE SERVER VALUES
+			var dLon = (theirLongR - position.coords.longitude) * Math.PI / 180; //and here
+			var distLat = (theirLatR - position.coords.latitude);
+			var distLon = (theirLongR - position.coords.longitude);
+			theirLongR = theirLongR *Math.PI / 180;
+			theirLatR = theirLatR *Math.PI / 180;
 			//Calculate distance here            
-			var R = 6371; // Radius of the earth in km
+			var R = 6371*1000; // Radius of the earth in km
 			var a = 0.5 - Math.cos(dLat) / 2 + Math.cos(myLatR)
 					* Math.cos(theirLatR * Math.PI / 180) * //and here
 					(1 - Math.cos(dLon)) / 2;
 
-			var dist = R * 2 * 1000 * Math.asin(Math.sqrt(a));
-
-			yourDistance.innerHTML = "Distance to your destination: " + dist
-					+ " meters";
+			var dist = R * 2  * Math.asin(Math.sqrt(a));
+			if(distLat+distLon <0.001)
+				yourDistance.innerHTML = "You have arrived at your destination.";
 
 			//Calculate angle here
 			var y = Math.sin(dLon) * Math.cos(theirLatR);                  //latitude of desination
