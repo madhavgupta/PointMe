@@ -37,13 +37,19 @@
  	int latitude; int longitude;
  		Object lat; Object lon;
 	 StringBuffer requestURL = request.getRequestURL();
+
 	 	String[] URLarr =URL.split("/");
 	 	String URL = URLarr[URLarr.length - 1];
+
 		if(!URL.equals("locate.css"))
 		{
 			System.out.println(URL);
 			DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-
+			Entity greeting = new Entity("UniqueID",URL);
+		 greeting.setProperty("Longitude", 0);
+		 greeting.setProperty("Latitude", 0);
+		 greeting.setProperty("UniqueID", URL);
+		  datastore.put(greeting);
 		
 	
 		}
