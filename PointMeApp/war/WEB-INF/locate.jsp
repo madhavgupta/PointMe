@@ -35,12 +35,12 @@
 
 
 	<%
- 	int latitude; int longitude;
- 		Object lat; Object lon;
-	 	StringBuffer requestURL = request.getRequestURL();
-	 	String URL = requestURL.toString();
-	 	String[] URLarr =URL.split("/");
-	 	pageContext.setAttribute("id",URLarr[URLarr.length -1 ]);
+		int latitude; int longitude;
+		 		Object lat; Object lon;
+			 	StringBuffer requestURL = request.getRequestURL();
+			 	String URL = requestURL.toString();
+			 	String[] URLarr =URL.split("/");
+			 	pageContext.setAttribute("id",URLarr[URLarr.length -1 ]);
 		if(!URLarr[URLarr.length -1 ].equals("locate.css"))
 		{
 
@@ -56,14 +56,13 @@
 			lon = ServerSide.getProperty("Longitude");
 			lat = ServerSide.getProperty("Latitude");
 			pageContext.setAttribute("Longitude",lon);
- 			pageContext.setAttribute("Latitude",lat);
-//  			latitude = (Integer) ServerSide.getProperty("Latitude");
-//  			longitude = (Integer) ServerSide.getProperty("Longitude");
+		 			pageContext.setAttribute("Latitude",lat);
+		//  			latitude = (Integer) ServerSide.getProperty("Latitude");
+		//  			longitude = (Integer) ServerSide.getProperty("Longitude");
 	%>
 	Your friend's location:
 	<b>${fn:escapeXml(Latitude)}</b> ,
 	<b>${fn:escapeXml(Longitude)}</b>
-	<span id="uniqueID" type="hidden">${fn:escapeXml(id)}</span>
 	<br>
 	<center>
 		<div id="compassContainer">
@@ -104,15 +103,15 @@
 			var displayAngle;
 			if (angleFound) {
 				if (event.webkitCompassHeading) {
-					
+
 					alpha = event.webkitCompassHeading;
 					displayAngle = angle + alpha;
-					
+
 					//rotation reversed for iOS
-					
-					compass.style.WebkitTransform = 'rotate(-' + (displayAngle - 45)
-							+ 'deg)';
-					
+
+					compass.style.WebkitTransform = 'rotate(-'
+							+ (displayAngle - 45) + 'deg)';
+
 				} else {
 					alpha = event.alpha;
 					displayAngle = angle + alpha;
@@ -120,10 +119,10 @@
 					if (!window.chrome) {
 						webkitAlpha = webkitAlpha - 270;
 					}
-	 				
-					compass.style.WebkitTransform = 'rotate(' + (webkitAlpha - 45)
-						+ 'deg)';
-					
+
+					compass.style.WebkitTransform = 'rotate('
+							+ (webkitAlpha - 45) + 'deg)';
+
 				}
 				if (alpha === undefined || alpha === null) {
 					yourAlpha.innerHTML = "Can't determine your device's orientation...";
@@ -131,48 +130,45 @@
 					yourAlpha.innerHTML = "Alpha is: " + alpha;
 
 				}
-				
-// 				compass.style.Transform = 'rotate(' + alpha + 'deg)';
 
-// 				compass.style.MozTransform = 'rotate(-' + alpha + 'deg)';
-			
+				// 				compass.style.Transform = 'rotate(' + alpha + 'deg)';
+
+				// 				compass.style.MozTransform = 'rotate(-' + alpha + 'deg)';
+
 				yourDA.innerHTML = "Displaying angle: " + displayAngle;
 			}
 
 		}
 
-		window.addEventListener('deviceorientation', handleOrientation);
+		var id, target, options;
 
-		function getLocation() {
-			if (navigator.geolocation) {
-				navigator.geolocation.watchPosition(callbackPosition);
-			} else {
-				yourLocation.innerHTML = "Geolocation is not supported by this browser.";
-			}
-		}
-		function getPrimaryLocation() {
-			alert(location.href.split("/")[4]);
-		}
-		function callbackPosition(position) {
+		function success(pos) {
+			var crd = pos.coords;
+
+// 			if (target.latitude === crd.latitude
+// 					&& target.longitude === crd.longitude) {
+// 				console.log('Congratulations, you reached the target');
+// 				//   navigator.geolocation.clearWatch(id);
+// 			}
+
 			var data = {};
-			yourLocation.innerHTML = "Your location: "
-					+ position.coords.latitude + ","
-					+ position.coords.longitude;
+			yourLocation.innerHTML = "Your location: " + crd.latitude + ","
+					+ crd.longitude;
 
-			data['long'] = position.coords.longitude;
-			data['lat'] = position.coords.latitude;
+			data['long'] = crd.longitude;
+			data['lat'] = crd.latitude;
 
-//			friendLocation.innerHTML = "Pointing to: "
-//					+ lat + ", " + lon;
+			//			friendLocation.innerHTML = "Pointing to: "
+			//					+ lat + ", " + lon;
 
 			//Convert latitude and longitude into radians
-			var primaryLocation = getPrimaryLocation();
-			var myLatR = position.coords.latitude * Math.PI / 180;
-			var myLonR = position.coords.longitude * Math.PI / 180;
+			var myLatR = crd.latitude * Math.PI / 180;
+			var myLonR = crd.longitude * Math.PI / 180;
 			var theirLongR = document.getElementById("Longitude");
 			var theirLatR = document.getElementById("Latitude");
-			var dLat = (-97.743279 - position.coords.latitude) * Math.PI / 180; //WE NEED TO CHANGE THE 0'S TO THE SERVER VALUES
-			var dLon = (30.295206 - position.coords.longitude) * Math.PI / 180; //and here
+			var dLat = (-97.743279 - crd.latitude) * Math.PI / 180; //WE NEED TO CHANGE THE 0'S TO THE SERVER VALUES
+			var dLon = (30.295206 - crd.longitude) * Math.PI / 180; //and here
+			
 
 			//Calculate distance here            
 			var R = 6371; // Radius of the earth in km
@@ -186,9 +182,9 @@
 					+ " meters";
 
 			//Calculate angle here
-			var y = Math.sin(dLon) * Math.cos(theirLatR);                  //latitude of desination
-			var x = Math.cos(myLatR) * Math.sin(theirLatR) - Math.sin(myLatR)      //latitude of destination
-					* Math.cos(theirLatR) * Math.cos(dLon);                    //latitude of destination
+			var y = Math.sin(dLon) * Math.cos(theirLatR);
+			var x = Math.cos(myLatR) * Math.sin(theirLatR) - Math.sin(myLatR)
+					* Math.cos(theirLatR) * Math.cos(dLon);
 			var brng = Math.atan2(y, x);
 			angle = brng * 180 / Math.PI;
 			angleFound = true;
@@ -214,7 +210,41 @@
 			//});
 
 		}
-		getLocation();
+
+		function error(err) {
+			console.warn('ERROR(' + err.code + '): ' + err.message);
+		}
+
+		target = {
+			latitude : 0, // add values from server here
+			longitude : 0
+		//
+		};
+
+		options = {
+			enableHighAccuracy : true,
+			timeout : 5000,
+			maximumAge : 3000
+		};
+
+		id = navigator.geolocation.watchPosition(success, error, options);
+		window.addEventListener('deviceorientation', handleOrientation);
+
+		// 		function getLocation() {
+		// 			if (navigator.geolocation) {
+		// 				navigator.geolocation.watchPosition(callbackPosition);
+		// 			} else {
+		// 				yourLocation.innerHTML = "Geolocation is not supported by this browser.";
+		// 			}
+		// 		}
+		// 		function getPrimaryLocation() {
+		// 			alert(location.href.split("/")[4]);
+		// 		}
+		// 		function callbackPosition(position) {
+
+		// 		}
+		// 		getLocation();
+		
 	</script>
 
 </body>
