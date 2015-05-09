@@ -25,23 +25,21 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 </head>
-<body>
-	<h1>PointMe : Your Guide to Finding Your Friends</h1>
+<body bgcolor = "#81EC62">
 
-<h1>PointMe : Your Guide to Finding Your Friends</h1>
-	<p id="demo"></p>
-	<p id="demo2"></p>
-	<p id="demo3"></p>
-	<p id="demo4"></p>
-	<p id="Longitude"></p>
-	<p id="Latitude"></p>
+<h1 align = center style="font-family:Helvetica,Lucida Sans Unicode , Verdana ; color:#4D3F68">PointMe : Your Guide to Finding Your Friends</h1>
+	<p id="demo" align = center style="font-family:Helvetica,Lucida Sans Unicode , Verdana ; color:#4D3F68"></p>
+	<p id="demo2" align = center style="font-family:Helvetica,Lucida Sans Unicode , Verdana ; color:#4D3F68"></p>
+	<p id="demo3" align = center style="font-family:Helvetica,Lucida Sans Unicode , Verdana ; color:#4D3F68"></p>
+	<p id="demo4" align = center style="font-family:Helvetica,Lucida Sans Unicode , Verdana ; color:#4D3F68"></p>
+	<p id="Longitude" align = center style="font-family:Helvetica,Lucida Sans Unicode , Verdana ; color:#4D3F68"></p>
+	<p id="Latitude" align = center style="font-family:Helvetica,Lucida Sans Unicode , Verdana ; color:#4D3F68"></p>
 	<%
 	StringBuffer requestURL = request.getRequestURL();
  	String URL = requestURL.toString();
  	String[] URLarr =URL.split("/");
 	pageContext.setAttribute("id",URLarr[URLarr.length -1 ]);
 	%>
-	<span id="uniqueID" type="hidden">${fn:escapeXml(id)}</span>
 	
 	<script>
 	var yourLocation = document.getElementById("demo");
@@ -55,7 +53,7 @@
 		}
 		function callbackPosition(position) {
 			var data = {};
-			yourLocation.innerHTML = "Your location: "
+			yourLocation.innerHTML = "<b>Your location:</b> "
 					+ position.coords.latitude + ","
 					+ position.coords.longitude;
 			
@@ -63,7 +61,7 @@
 			document.getElementById("lon") = position.coords.longitude;
 			document.getElementById("lat") = position.coords.longitude;
 			
-//			friendLocation.innerHTML = "Pointing to: "
+//			friendLocation.innerHTML = "<b>Pointing to: </b>"
 //					+ lat + ", " + lon;
 
 			document.getElementById("Longitude").innerHTML = position.coords.longitude;
