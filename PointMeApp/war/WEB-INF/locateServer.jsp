@@ -27,7 +27,12 @@
 </head>
 <body bgcolor = "#81EC62">
 
-<h1 align = center style="font-family:Helvetica,Lucida Sans Unicode , Verdana ; color:#4D3F68">PointMe : Your Guide to Finding Your Friends</h1>
+	<h1 align=center style="background-color: #81EC62 ; margin: 0px 0px 0px; font-family:Helvetica,Lucida Sans Unicode , Verdana ; color:#4D3F68 ; font-size: 4em">PointMe</h1>
+    <br>
+    <h2 align=center style="background-color: #81EC62; margin: 0px 0px 0px; font-family:Helvetica,Lucida Sans Unicode , Verdana ; color:#4D3F68 ; font-size: 2em" >A Compass For Your Friends</h2> 
+    <br>
+    <br>
+    <br>
 	<p id="demo" align = center style="font-family:Helvetica,Lucida Sans Unicode , Verdana ; color:#4D3F68"></p>
 	<p id="demo2" align = center style="font-family:Helvetica,Lucida Sans Unicode , Verdana ; color:#4D3F68"></p>
 	<p id="demo3" align = center style="font-family:Helvetica,Lucida Sans Unicode , Verdana ; color:#4D3F68"></p>
