@@ -21,14 +21,32 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <head>
-<link rel="stylesheet" href="locate.css">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
 </head>
 <body>
 	<h1>PointMe : Your Guide to Finding Your Friends</h1>
 
-
+<h1>PointMe : Your Guide to Finding Your Friends</h1>
+	<p id="demo"></p>
+	<p id="demo2"></p>
+	<p id="demo3"></p>
+	<p id="demo4"></p>
+	<p id="demo5"></p>
+	<p id="demo6"></p>
+	<p id="Longitude"></p>
+	<p id="Latitude"></p>
+	<%
+	StringBuffer requestURL = request.getRequestURL();
+ 	String URL = requestURL.toString();
+ 	String[] URLarr =URL.split("/");
+	pageContext.setAttribute("id",URLarr[URLarr.length -1 ]);
+	%>
+	<span id="uniqueID" type="hidden">${fn:escapeXml(id)}</span>
 	
 	<script>
+	var yourLocation = document.getElementById("demo");
+
 		function getLocation() {
 			if (navigator.geolocation) {
 				navigator.geolocation.watchPosition(callbackPosition);
@@ -48,24 +66,22 @@
 //			friendLocation.innerHTML = "Pointing to: "
 //					+ lat + ", " + lon;
 
-			document.getElementById("Longitude")= position.coords.longitude;
-			document.getElementById("Latitude")= position.coords.latitude;
+			document.getElementById("Longitude").innerHTML = position.coords.longitude;
+			document.getElementById("Latitude").innerHTML= position.coords.latitude;
 		
 			
-			if (document.cookie == "") {
 
-				id = hashCode(Date());
-				document.cookie = id;
-			} else {
+			data['identifier'] = document.getElementById("uniqueID");
 
-			}
-			data['identifier'] = id;
 			$.ajax({
-				url : "/registerLocation/",
+				url : "/registerLocation",
 				data : data,
 				method : "POST",
 				success : function(msg) {
 					alert(msg);
+				},
+				error: function( request, status, error) {
+					alert(error);
 				},
 			});
 
