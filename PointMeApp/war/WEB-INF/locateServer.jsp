@@ -39,14 +39,20 @@
 	<p id="demo4" align = center style="font-family:Helvetica,Lucida Sans Unicode , Verdana ; color:#4D3F68"></p>
 	<p id="Longitude" align = center style="font-family:Helvetica,Lucida Sans Unicode , Verdana ; color:#4D3F68"></p>
 	<p id="Latitude" align = center style="font-family:Helvetica,Lucida Sans Unicode , Verdana ; color:#4D3F68"></p>
+
 	<%
 	StringBuffer requestURL = request.getRequestURL();
  	String URL = requestURL.toString();
  	String[] URLarr =URL.split("/");
 	pageContext.setAttribute("id",URLarr[URLarr.length -1 ]);
-	%>
 	
+	%>
+		<form align = center style="background-color: #81EC62"action="/SentNumber" method="GET"> 
+    	<input id="sendButton" height="42" type="submit" value="Deactivate Link"/>
+    	<input type = "hidden" name = "id" value = ${fn:escapeXml(id)}/>
+   	</form>
 	<script>
+	
 	var yourLocation = document.getElementById("demo");
 
 		function getLocation() {
