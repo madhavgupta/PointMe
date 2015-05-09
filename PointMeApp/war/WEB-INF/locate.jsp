@@ -21,18 +21,19 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <head>
-<link rel="stylesheet" href="locate.css">
-<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
-</head>
-<body>
-	<h1>PointMe : Your Guide to Finding Your Friends</h1>
-	<p id="demo"></p>
-	<p id="demo2"></p>
-	<p id="demo3"></p>
-	<p id="demo4"></p>
-	<p id="demo5"></p>
-	<p id="demo6"></p>
+<link rel="stylesheet"  type="text/css" href="WEB-INF/locate.css">
+<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+   <script type="text/javascript" language="javascript" src="pointmeapp/jquery-1.11.3.min.js"></script>
 
+</head>
+<body bgcolor = "#81EC62">
+	<h1 id = "title" align = center style="font-family:Helvetica,Lucida Sans Unicode , Verdana ; color:#4D3F68">PointMe : Your Guide to Finding Your Friends</h1>
+	<p id="demo" align = center style="font-family:Helvetica,Lucida Sans Unicode , Verdana ; color:#4D3F68"></p>
+	<p id="demo2" align = center style="font-family:Helvetica,Lucida Sans Unicode , Verdana ; color:#4D3F68"></p>
+	<p id="demo3" align = center style="font-family:Helvetica,Lucida Sans Unicode , Verdana ; color:#4D3F68"></p>
+	<p id="demo4" align = center style="font-family:Helvetica,Lucida Sans Unicode , Verdana ; color:#4D3F68"></p>
+	<p id="demo5" align = center style="font-family:Helvetica,Lucida Sans Unicode , Verdana ; color:#4D3F68"></p>
+	<p id="demo6" align = center style="font-family:Helvetica,Lucida Sans Unicode , Verdana ; color:#4D3F68"></p>
 
 	<%
 		int latitude; int longitude;
@@ -60,9 +61,10 @@
 		//  			latitude = (Integer) ServerSide.getProperty("Latitude");
 		//  			longitude = (Integer) ServerSide.getProperty("Longitude");
 	%>
-	Your friend's location:
-	<b>${fn:escapeXml(Latitude)}</b> ,
-	<b>${fn:escapeXml(Longitude)}</b>
+	<p align = center style="font-family:Helvetica,Lucida Sans Unicode , Verdana ; color:#4D3F68"><b>Your friend's location:</b>
+	${fn:escapeXml(Latitude)} ,
+	${fn:escapeXml(Longitude)}
+	</p>
 	<br>
 	<center>
 		<div id="compassContainer">
@@ -127,7 +129,6 @@
 				if (alpha === undefined || alpha === null) {
 					yourAlpha.innerHTML = "Can't determine your device's orientation...";
 				} else {
-					yourAlpha.innerHTML = "Alpha is: " + alpha;
 
 				}
 
@@ -135,7 +136,6 @@
 
 				// 				compass.style.MozTransform = 'rotate(-' + alpha + 'deg)';
 
-				yourDA.innerHTML = "Displaying angle: " + displayAngle;
 			}
 
 		}
@@ -152,7 +152,7 @@
 // 			}
 
 			var data = {};
-			yourLocation.innerHTML = "Your location: " + crd.latitude + ","
+			yourLocation.innerHTML = "<b>Your location: </b>" + crd.latitude + ","
 					+ crd.longitude;
 
 			data['long'] = crd.longitude;
@@ -178,8 +178,6 @@
 
 			var dist = R * 2 * 1000 * Math.asin(Math.sqrt(a));
 
-			yourDistance.innerHTML = "Distance to your destination: " + dist
-					+ " meters";
 
 			//Calculate angle here
 			var y = Math.sin(dLon) * Math.cos(theirLatR);
@@ -188,9 +186,6 @@
 			var brng = Math.atan2(y, x);
 			angle = brng * 180 / Math.PI;
 			angleFound = true;
-
-			yourAngle.innerHTML = "Angle to your destination: " + angle
-					+ " degrees";
 
 			if (document.cookie == "") {
 

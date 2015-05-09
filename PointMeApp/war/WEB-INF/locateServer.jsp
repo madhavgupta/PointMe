@@ -21,8 +21,9 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <head>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+   <script type="text/javascript" language="javascript" src="pointmeapp/jquery-1.11.3.min.js"></script>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 </head>
 <body>
 	<h1>PointMe : Your Guide to Finding Your Friends</h1>
@@ -32,8 +33,6 @@
 	<p id="demo2"></p>
 	<p id="demo3"></p>
 	<p id="demo4"></p>
-	<p id="demo5"></p>
-	<p id="demo6"></p>
 	<p id="Longitude"></p>
 	<p id="Latitude"></p>
 	<%
@@ -59,10 +58,11 @@
 			yourLocation.innerHTML = "Your location: "
 					+ position.coords.latitude + ","
 					+ position.coords.longitude;
+			
 
-			data['lon'] = position.coords.longitude;
-			data['lat'] = position.coords.latitude;
-
+			document.getElementById("lon") = position.coords.longitude;
+			document.getElementById("lat") = position.coords.longitude;
+			
 //			friendLocation.innerHTML = "Pointing to: "
 //					+ lat + ", " + lon;
 
@@ -70,22 +70,34 @@
 			document.getElementById("Latitude").innerHTML= position.coords.latitude;
 		
 			
-
+			data['lon'] = position.coords.longitude;
+			data['lat'] = position.coords.latitude;
 			data['identifier'] = document.getElementById("uniqueID");
 
 			$.ajax({
+				type : "GET",
 				url : "/registerLocation",
 				data : data,
-				method : "POST",
-				success : function(msg) {
-					alert(msg);
+				dataType: "json",
+				async:false,
+				always : function() {
+				alert("ajax success");
+
 				},
-				error: function( request, status, error) {
-					alert(error);
+				success : function() {
+				alert("ajax success");
+
 				},
+			     error: function () {
+       			 alert("FAILURE");
+     			 },
+				complete: function(){
+				alert("ajax call complete");
+				}
 			});
 
 		}
+		
 		getLocation();
 	</script>
 
