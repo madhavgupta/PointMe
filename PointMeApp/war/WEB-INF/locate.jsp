@@ -203,7 +203,7 @@
 			angleFound = true;
 
 
-			getFriendsLocation();
+			getFriendsLocation(data);
 
 		}
 		function getFriendsLocation(data) {
