@@ -213,7 +213,7 @@
 							location = JSON.parse(msg);
 							fLon = location['longitude'];
 							fLat = location['latitude'];
-							document.getElementById("update-location").innerHTML = "Your friends location: "+ location['longitude'] + " ," +location['latitude'] ;
+							document.getElementById("update-location").innerHTML = "Your friend's location: "+ location['longitude'] + " ," +location['latitude'] ;
 					},
 				});
 			}
