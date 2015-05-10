@@ -25,10 +25,13 @@ public class LocateServer extends HttpServlet{
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException{
 		//retrieve url data from datastore ie with number get location coordinates
 				String test = (String) req.getParameter("id");
+				test = test.substring(0, test.length()-1);
+				
 			 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 				Filter uuidFilter = new FilterPredicate("UniqueID", FilterOperator.EQUAL, test);
 				Query q = new Query("UniqueID").setFilter(uuidFilter);
 				PreparedQuery pq = datastore.prepare(q);
+				List<Entity> IDS = datastore.prepare(q).asList(FetchOptions.Builder.withLimit(20));
 				for (Entity result : pq.asIterable()) {
 				datastore.delete(result.getKey());
 				}
