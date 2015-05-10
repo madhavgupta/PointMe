@@ -72,8 +72,7 @@
 //			friendLocation.innerHTML = "<b>Pointing to: </b>"
 //					+ lat + ", " + lon;
 
-			document.getElementById("Longitude").innerHTML = position.coords.longitude;
-			document.getElementById("Latitude").innerHTML= position.coords.latitude;
+			;
 		
 			
 			data['lon'] = position.coords.longitude;
