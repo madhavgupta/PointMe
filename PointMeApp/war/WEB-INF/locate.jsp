@@ -211,6 +211,8 @@
 					method : "POST",
 					success : function(msg) {
 							location = JSON.parse(msg);
+							fLon = location['longitude'];
+							fLat = location['latitude'];
 							document.getElementById("update-location").innerHTML = "Your friends location: "+ location['longitude'] + " ," +location['latitude'] ;
 					},
 				});
