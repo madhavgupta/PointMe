@@ -53,7 +53,7 @@
    	</form>
 	<script>
 	old = true;
-	setInterval(function(){ old = true; )}, 10000);
+	setInterval(function(){ old = true; }, 10000);
 	var yourLocation = document.getElementById("demo");
 
 		function getLocation() {
