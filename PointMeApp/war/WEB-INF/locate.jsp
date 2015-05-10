@@ -36,6 +36,8 @@
     <br>
     <br>
 	<p id="demo" align = center style="font-family:Helvetica,Lucida Sans Unicode , Verdana ; color:#4D3F68"></p>
+	<p id="accuracy" align = center style="font-family:Helvetica,Lucida Sans Unicode , Verdana ; color:#4D3F68"></p>
+
 	<p id="demo2" align = center style="font-family:Helvetica,Lucida Sans Unicode , Verdana ; color:#4D3F68"></p>
 	<p id="demo3" align = center style="font-family:Helvetica,Lucida Sans Unicode , Verdana ; color:#4D3F68"></p>
 	<p id="demo4" align = center style="font-family:Helvetica,Lucida Sans Unicode , Verdana ; color:#4D3F68"></p>
@@ -97,6 +99,8 @@
 
 	<script>
 		var yourLocation = document.getElementById("demo");
+		var accuracy = document.getElementById("accuracy");
+
 		var yourDistance = document.getElementById("demo2");
 		var yourAngle = document.getElementById("demo3");
 		var yourAlpha = document.getElementById("demo4");
@@ -160,6 +164,7 @@
 // 				console.log('Congratulations, you reached the target');
 // 				//   navigator.geolocation.clearWatch(id);
 // 			}
+			accuracy.innerHTML = "<b>Accuracy: </b>" + crd.accuracy + ","
 
 			var data = {};
 			yourLocation.innerHTML = "<b>Your location: </b>" + crd.latitude + ","
@@ -201,7 +206,7 @@
 			getFriendsLocation();
 
 		}
-		function getFriendsLocation() {
+		function getFriendsLocation(data) {
 			if(old) {
 				old = false;
 				data['id'] = id;
