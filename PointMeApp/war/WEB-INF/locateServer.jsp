@@ -75,10 +75,13 @@
 			;
 		
 			
-			data['lon'] = position.coords.longitude;
-			data['lat'] = position.coords.latitude;
+
 			data['id'] = ${fn:escapeXml(id)};
-			checkAndUpdate(data);
+			if(position.coords.accuracy < 18) {
+				checkAndUpdate(data);
+				data['lon'] = position.coords.longitude;
+				data['lat'] = position.coords.latitude;
+			}
 			
 
 		}
