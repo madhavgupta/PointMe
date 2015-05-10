@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <%@ page contentType="text/html; charset=UTF-8" language="java"%>
 <%@ page import="java.util.List"%>
 <%@ page import="com.google.appengine.api.users.User"%>
@@ -19,11 +20,10 @@
 <%@ page import="com.google.appengine.api.datastore.Text"%>
 <%@ page import="java.lang.Math"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<!DOCTYPE html>
+<html>
 <head>
-   <script type="text/javascript" language="javascript" src="pointmeapp/jquery-1.11.3.min.js"></script>
+   <script type="text/javascript" language="javascript" src="../pointmeapp/jquery-1.11.3.min.js"></script>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 </head>
 <body bgcolor = "#81EC62">
 
@@ -44,7 +44,7 @@
 	StringBuffer requestURL = request.getRequestURL();
  	String URL = requestURL.toString();
  	String[] URLarr =URL.split("/");
-	pageContext.setAttribute("id",URLarr[URLarr.length -1 ]);
+	pageContext.setAttribute("id",URLarr[URLarr.length - 1 ]);
 	
 	%>
 		<form align = center style="background-color: #81EC62"action="/SentNumber" method="GET"> 
@@ -52,7 +52,8 @@
     	<input type = "hidden" name = "id" value = ${fn:escapeXml(id)}/>
    	</form>
 	<script>
-	
+	old = true;
+	setInterval(function(){ old = true; )}, 10000);
 	var yourLocation = document.getElementById("demo");
 
 		function getLocation() {
@@ -67,11 +68,7 @@
 			yourLocation.innerHTML = "<b>Your location:</b> "
 					+ position.coords.latitude + ","
 					+ position.coords.longitude;
-			
 
-			document.getElementById("lon") = position.coords.longitude;
-			document.getElementById("lat") = position.coords.longitude;
-			
 //			friendLocation.innerHTML = "<b>Pointing to: </b>"
 //					+ lat + ", " + lon;
 
@@ -81,29 +78,30 @@
 			
 			data['lon'] = position.coords.longitude;
 			data['lat'] = position.coords.latitude;
-			data['identifier'] = document.getElementById("uniqueID");
+			data['id'] = ${fn:escapeXml(id)};
+			checkAndUpdate(data);
+			
 
-			$.ajax({
-				type : "GET",
-				url : "/registerLocation",
-				data : data,
-				dataType: "json",
-				async:false,
-				always : function() {
-				alert("ajax success");
+		}
+		function checkAndUpdate(data) {
+			if(old) {
+				old = false;
+				$.ajax({
+					type : "POST",
+					url : "/registerLocation",
+					data : data,
+					success : function() {
 
-				},
-				success : function() {
-				alert("ajax success");
 
-				},
-			     error: function () {
-       			 alert("FAILURE");
-     			 },
-				complete: function(){
-				alert("ajax call complete");
-				}
-			});
+					},
+			     	error: function () {
+
+     			 	},
+					complete: function(){
+
+					}
+				});
+			}
 
 		}
 		

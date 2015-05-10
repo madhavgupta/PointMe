@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+
 <%@ page contentType="text/html; charset=UTF-8" language="java"%>
 <%@ page import="java.util.List"%>
 <%@ page import="com.google.appengine.api.users.User"%>
@@ -19,7 +21,7 @@
 <%@ page import="com.google.appengine.api.datastore.Text"%>
 <%@ page import="java.lang.Math"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<!DOCTYPE html>
+<html>
 <head>
 <link rel="stylesheet"  type="text/css" href="WEB-INF/locate.css">
 <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
@@ -192,22 +194,16 @@
 			angle = brng * 180 / Math.PI;
 			angleFound = true;
 
-			if (document.cookie == "") {
 
-				id = hashCode(Date());
-				document.cookie = id;
-			} else {
-
-			}
-			//data['id'] = id;
-			//$.ajax({
-			//	url : "",
-			//	data : data,
-			//	method : "POST",
-			//	success : function(msg) {
-
-			//	},
-			//});
+			data['id'] = id;
+			$.ajax({
+				url : "/registerLocation",
+				data : data,
+				method : "POST",
+				success : function(msg) {
+					alert("sent");
+				},
+			});
 
 		}
 
