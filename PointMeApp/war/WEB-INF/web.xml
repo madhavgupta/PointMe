@@ -31,6 +31,15 @@
     <servlet-name>RegisterLocation</servlet-name>
     <servlet-class>pointMeApp.server.ObtainLocation</servlet-class>
   </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>FindSpot</servlet-name>
+    <url-pattern>/findSpot</url-pattern>
+  </servlet-mapping>
+      <servlet>
+    <servlet-name>FindSpot</servlet-name>
+    <servlet-class>pointMeApp.server.FindSpot</servlet-class>
+  </servlet>
     <servlet-mapping>
     <servlet-name>IntroScreen</servlet-name>
     <url-pattern>/IntroScreen</url-pattern>
@@ -71,6 +80,10 @@
         <filter-name>ObjectifyFilter</filter-name>
         <filter-class>com.googlecode.objectify.ObjectifyFilter</filter-class>
 </filter>
+<static-files>
+  <include path="/pointmeapp/**.js" >
+  </include>
+</static-files>
 <filter-mapping>
         <filter-name>ObjectifyFilter</filter-name>
         <url-pattern>/*</url-pattern>

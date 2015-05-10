@@ -22,7 +22,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <html>
 <head>
-   <script type="text/javascript" language="javascript" src="../pointmeapp/jquery-1.11.3.min.js"></script>
+   <script type="text/javascript" language="javascript" src="../jquery-1.11.3.min.js"></script>
 
 </head>
 <body bgcolor = "#81EC62">

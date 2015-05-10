@@ -25,7 +25,7 @@
 <head>
 <link rel="stylesheet"  type="text/css" href="WEB-INF/locate.css">
 <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-   <script type="text/javascript" language="javascript" src="pointmeapp/jquery-1.11.3.min.js"></script>
+   <script type="text/javascript" language="javascript" src="../jquery-1.11.3.min.js"></script>
 
 </head>
 <body bgcolor = "#81EC62">
@@ -68,9 +68,8 @@
 		//  			latitude = (Integer) ServerSide.getProperty("Latitude");
 		//  			longitude = (Integer) ServerSide.getProperty("Longitude");
 	%>
-	<p align = center style="font-family:Helvetica,Lucida Sans Unicode , Verdana ; color:#4D3F68"><b>Your friend's location:</b>
-	${fn:escapeXml(Latitude)} ,
-	${fn:escapeXml(Longitude)}
+	<p id="update-location" align = center style="font-family:Helvetica,Lucida Sans Unicode , Verdana ; color:#4D3F68"><b>Your friend''s location:</b>
+
 	</p>
 	<br>
 	<center>
@@ -103,10 +102,12 @@
 		var yourAlpha = document.getElementById("demo4");
 		var yourDA = document.getElementById("demo5");
 		var friendLocation = document.getElementById("demo6");
-
+		var fLat = ${fn:escapeXml(Latitude)};
+		var fLon = ${fn:escapeXml(Longitude)};
 		var angle;
 		var angleFound = false;
-
+		old = true;
+		setInterval(function(){ old = true; }, 10000);
 		function handleOrientation(event) {
 			var alpha;
 			var displayAngle;
@@ -148,7 +149,9 @@
 		}
 
 		var id, target, options;
-
+		$( document ).ready(function() {
+    		document.getElementById("update-location").innerHTML = fLon + ", " + fLat;
+		});
 		function success(pos) {
 			var crd = pos.coords;
 
@@ -195,18 +198,25 @@
 			angleFound = true;
 
 
-			data['id'] = id;
-			$.ajax({
-				url : "/registerLocation",
-				data : data,
-				method : "POST",
-				success : function(msg) {
-					alert("sent");
-				},
-			});
+			getFriendsLocation();
 
 		}
+		function getFriendsLocation() {
+			if(old) {
+				old = false;
+				data['id'] = id;
+				$.ajax({
+					url : "/findSpot",
+					data : data,
+					method : "POST",
+					success : function(msg) {
+							location = JSON.parse(msg);
+							document.getElementById("update-location").innerHTML = "Your friends location: "+ location['longitude'] + " ," +location['latitude'] ;
+					},
+				});
+			}
 
+		}
 		function error(err) {
 			console.warn('ERROR(' + err.code + '): ' + err.message);
 		}
