@@ -181,8 +181,8 @@
 			var myLonR = crd.longitude * Math.PI / 180;
 			var theirLongR = document.getElementById("Longitude");
 			var theirLatR = document.getElementById("Latitude");
-			var dLat = (-97.743279 - crd.latitude) * Math.PI / 180; //WE NEED TO CHANGE THE 0'S TO THE SERVER VALUES
-			var dLon = (30.295206 - crd.longitude) * Math.PI / 180; //and here
+			var dLat = (fLat - crd.latitude) * Math.PI / 180; //WE NEED TO CHANGE THE 0'S TO THE SERVER VALUES
+			var dLon = (fLon - crd.longitude) * Math.PI / 180; //and here
 			
 
 			//Calculate distance here            
